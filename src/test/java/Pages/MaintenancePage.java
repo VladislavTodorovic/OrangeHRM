@@ -9,12 +9,16 @@ public class MaintenancePage {
     WebDriver driver;
     WebDriverWait wdwait;
 
-
+    WebElement textAdministratorAccess;
     WebElement cancelButton;
 
     public MaintenancePage( WebDriver driver,WebDriverWait wdwait) {
         this.wdwait = wdwait;
         this.driver = driver;
+    }
+
+    public WebElement getTextAdministratorAccess() {
+        return driver.findElement(By.cssSelector(".oxd-text.oxd-text--h6.orangehrm-admin-access-title"));
     }
 
     public WebElement getCancelButton() {

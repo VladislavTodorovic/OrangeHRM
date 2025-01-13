@@ -25,8 +25,8 @@ public class BaseTest {
     @BeforeClass
     public void setUp(){
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        wdwait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wdwait = new WebDriverWait(driver, Duration.ofSeconds(10));
         loginPage = new LoginPage(driver, wdwait);
         requestPasswordResetCodePage = new RequestPasswordResetCodePage(driver, wdwait);
         dashboardPage = new DashboardPage(driver, wdwait);

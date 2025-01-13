@@ -17,6 +17,8 @@ public class BaseOtherTest {
     public RequestPasswordResetCodePage requestPasswordResetCodePage;
     public AdminPage adminPage;
     public MaintenancePage maintenancePage;
+    public MyInfoPage myInfoPage;
+
 
 
 
@@ -24,12 +26,13 @@ public class BaseOtherTest {
     public void setUp(){
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wdwait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wdwait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(100));
         loginPage = new LoginPage(driver, wdwait);
         requestPasswordResetCodePage = new RequestPasswordResetCodePage(driver, wdwait);
         dashboardPage = new DashboardPage(driver, wdwait);
         adminPage = new AdminPage(driver, wdwait);
         maintenancePage = new MaintenancePage(driver, wdwait);
+        myInfoPage = new MyInfoPage(driver, wdwait);
         driver.manage().window().maximize();
         driver.get("https://opensource-demo.orangehrmlive.com");
         loginPage.validLogin();
