@@ -19,6 +19,7 @@ public class BaseOtherTest {
     public MaintenancePage maintenancePage;
     public MyInfoPage myInfoPage;
     public PIMPage pimPage;
+    public static String employeeIdByVlajke ="01010101";
 
 
 

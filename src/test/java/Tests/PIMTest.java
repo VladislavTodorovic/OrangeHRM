@@ -16,6 +16,7 @@ public class PIMTest extends BaseOtherTest {
 
     private String originalTab;
 
+
     @BeforeMethod
     public void pageSetUp() {
         originalTab = driver.getWindowHandle();
@@ -33,39 +34,30 @@ public class PIMTest extends BaseOtherTest {
     @Test(priority = 20)
     public void addNewEmployeeFirstTune() {
     pimPage.getAddButton().click();
-    pimPage.getFieldFirstName().sendKeys("Jovanica");
+    pimPage.getFieldFirstName().sendKeys("Jovan");
     for(int i=0; i<4; i++) {
         pimPage.getFieldEmployeeId().sendKeys(Keys.BACK_SPACE);
     }
-    pimPage.getFieldEmployeeId().sendKeys("1000444");
-    pimPage.getFieldLastName().sendKeys("Jovica");
+    pimPage.getFieldEmployeeId().sendKeys(employeeIdByVlajke);
+    pimPage.getFieldLastName().sendKeys("Jovic");
     pimPage.getSaveAddEmployeeGreenButton().click();
     wdwait.until(ExpectedConditions.visibilityOf(pimPage.getEmployeeNameAbovePicture()));
     String valueId = pimPage.getEmployeeIdInPeronalDetails().getAttribute("value");
-    Assert.assertEquals(valueId, "1000444");
+    Assert.assertEquals(valueId, employeeIdByVlajke);
     }
 
     @Test(priority = 30)
     public void searchByEmloyeeName(){
+        pimPage.searchFormularForEmployeeNameOrSupervisorName("Employee Name", " Jovan Jovic");
 
     }
 
     @Test(priority = 33)
-    public void searchByStoUkucas (){
-
-        pimPage.searchFormular("Employee Id");
-
-
-
-
-
-
-
-
-
-
-
+    public void searchByEmployeeId (){
+        pimPage.searchFormularForId("Employee Id", employeeIdByVlajke);
+        pimPage.getSearchButtonBelowEmployeeInformationFields().click();
     }
+
 
     @Test(priority = 140)
     public void deleteEmployee(){

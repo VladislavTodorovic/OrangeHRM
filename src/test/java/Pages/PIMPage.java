@@ -26,6 +26,8 @@ public class PIMPage {
     List<WebElement> listOfParentElements;
     List<WebElement> listOfChildElements;
     List<WebElement> listOfGrandsonElements;
+    WebElement searchButtonBelowEmployeeInformationFields;
+
 
     public PIMPage(WebDriver driver, WebDriverWait wdwait) {
         this.driver = driver;
@@ -68,6 +70,10 @@ public class PIMPage {
         return driver.findElement(By.className("orangehrm-edit-employee-name"));
     }
 
+    public WebElement getSearchButtonBelowEmployeeInformationFields() {
+        return driver.findElement(By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--secondary.orangehrm-left-space"));
+    }
+
     //--------
     public void redirectionToTopBarNav(String requestedNav) {
         listTopBarNavs = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-text.oxd-text--span.oxd-main-menu-item--name")));
@@ -83,23 +89,60 @@ public class PIMPage {
         }
     }
 
-    public void searchFormular(String value) {
-        listOfParentElements = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-input-group.oxd-input-field-bottom-space")));
-        for (int i = 0; i < listOfParentElements.size(); i++) {
-            WebElement parent = listOfParentElements.get(i);
-            for (int j = 0; j < listOfChildElements.size(); j++) {
-                WebElement child = parent.findElement(By.className("oxd-input-group__label-wrapper"));
-                WebElement grandson = parent.findElement(By.cssSelector(".oxd-input.oxd-input--active"));
-                if (child.getText().equals(value)) {
-                    grandson.sendKeys("Uspelo je");
-                    break;
+//OVO JE DOBRO, NE DIRAJ GA DA NE BI SVE POKVARIO!
+    public void searchFormularForId(String nameOfField, String valueInField) {
+        List<WebElement> listOfParentElements = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-input-group.oxd-input-field-bottom-space")));
+        for (WebElement parent : listOfParentElements) {
+            List<WebElement> childElements = parent.findElements(By.className("oxd-input-group__label-wrapper"));
+            for (WebElement child : childElements) {
+                if (child.getText().equals(nameOfField)) {
+                    List<WebElement> grandsonElements = parent.findElements(By.cssSelector(".oxd-input.oxd-input--active"));
+                    if (!grandsonElements.isEmpty()) {
+                        WebElement grandson = grandsonElements.get(0);
+                        if (grandson.isDisplayed() && grandson.isEnabled()) {
+                            grandson.sendKeys(valueInField);
+                            break;
+                        }
+                    }
+                    }
                 }
             }
         }
 
+    public void searchFormularForEmployeeNameOrSupervisorName(String nameOfField, String valueInField) {
+        List<WebElement> listOfParentElements = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-input-group.oxd-input-field-bottom-space")));
+
+        for (WebElement parent : listOfParentElements) {
+            // Nalazimo child elemente
+            List<WebElement> childElements = parent.findElements(By.className("oxd-input-group__label-wrapper"));
+
+            for (WebElement child : childElements) {
+                // Ako je tekst u child elementu jednak nameOfField, unosimo vrednost u grandson
+                if (child.getText().equals(nameOfField)) {
+
+                    // Nalazimo grandson elemente u okviru trenutnog parent elementa
+                    List<WebElement> grandsonElements = parent.findElements(By.cssSelector(".oxd-autocomplete-text-input.oxd-autocomplete-text-input--active"));
+
+                    if (!grandsonElements.isEmpty()) {
+                        WebElement grandson = grandsonElements.get(0);
+
+                        // Proveravamo da li je grandson prikazan i omogućeno je da se u njega unese tekst
+                        if (grandson.isDisplayed() && grandson.isEnabled()) {
+                            grandson.sendKeys(valueInField);
+                            grandson.click();  // Ako je potrebno, kliknite na element nakon unosa
+
+                            break;  // Prekidamo petlju nakon što smo uneli vrednost u grandson
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     }
-}
+
+
 
 
 
