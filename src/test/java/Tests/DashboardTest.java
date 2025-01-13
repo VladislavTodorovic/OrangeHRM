@@ -155,15 +155,13 @@ public class DashboardTest extends BaseOtherTest {
     }
 
     @Test(priority = 280)
-    public void updatePassword()  {
+    public void updatePassword() {
         dashboardPage.redirectionToItemOfDDL("Change Password");
         dashboardPage.getCurrentPasswordField().sendKeys("admin123");
         dashboardPage.getPasswordField().sendKeys("Asdf1234");
         dashboardPage.getConfirmPasswordField().sendKeys("Asdf1234");
         dashboardPage.getPasswordChangeSaveButton().click();
-        // OVDE FALI ASERTACIJA!!!! Popup message traje samo dve sekunde!!
-
-
+        // OVDE FALI ASERTACIJA!!!! Popup message traje samo dve sekunde!! TO JOS NE ZNAM KAKO DA IZVEDEM!
 
     }
 
@@ -189,13 +187,18 @@ public class DashboardTest extends BaseOtherTest {
     }
 
 
+
+
+
+
+
+
     @Test(priority = 400)
     public void logout(){
         dashboardPage.redirectionToItemOfDDL("Logout");
         Assert.assertTrue(loginPage.getLoginButton().isDisplayed());
     }
 
-/*
     @AfterMethod
     public void afterMethod() {
         Set<String> handles = driver.getWindowHandles();
@@ -209,6 +212,6 @@ public class DashboardTest extends BaseOtherTest {
         }
         driver.switchTo().window(originalTab);
     }
-*/
+
 
 }

@@ -18,7 +18,6 @@ public class AdminTest extends BaseTest {
     @Test
     public void addNewSystemUser(){
         loginPage.validLogin();
-        //dashboardPage.redirectionAdminPage();
         dashboardPage.redirectionToPage("Admin");
 
 

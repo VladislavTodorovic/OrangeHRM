@@ -33,6 +33,8 @@ public class DashboardPage {
     WebElement passwordsDoNotMatch;
 
 
+
+
     public DashboardPage(WebDriver driver, WebDriverWait wdwait) {
         this.driver = driver;
         this.wdwait = wdwait;
@@ -102,14 +104,16 @@ public class DashboardPage {
 
     public void redirectionToPage(String requestedPage) {
         listOfRedirections = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-text.oxd-text--span.oxd-main-menu-item--name")));
-        JavascriptExecutor js = (JavascriptExecutor)
-                driver;for (int i = 0; i < listOfRedirections.size(); i++) {WebElement redirection = listOfRedirections.get(i);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        for (int i = 0; i < listOfRedirections.size(); i++) {WebElement redirection = listOfRedirections.get(i);
             js.executeScript("arguments[0].scrollIntoView(true);", redirection);
             if (redirection.getText().equals(requestedPage)){
                 redirection.click();
                 break;}
         }
     }
+
+
 
     public void redirectionToItemOfDDL(String requestedOption) {
         userDropDown = driver.findElement(By.className("oxd-userdropdown-tab"));

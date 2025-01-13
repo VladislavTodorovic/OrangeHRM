@@ -18,6 +18,7 @@ public class BaseOtherTest {
     public AdminPage adminPage;
     public MaintenancePage maintenancePage;
     public MyInfoPage myInfoPage;
+    public PIMPage pimPage;
 
 
 
@@ -33,6 +34,7 @@ public class BaseOtherTest {
         adminPage = new AdminPage(driver, wdwait);
         maintenancePage = new MaintenancePage(driver, wdwait);
         myInfoPage = new MyInfoPage(driver, wdwait);
+        pimPage = new PIMPage(driver, wdwait);
         driver.manage().window().maximize();
         driver.get("https://opensource-demo.orangehrmlive.com");
         loginPage.validLogin();
