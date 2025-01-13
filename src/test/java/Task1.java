@@ -1,6 +1,4 @@
-import com.google.common.base.VerifyException;
-import com.sun.source.tree.AssertTree;
-import io.github.bonigarcia.wdm.WebDriverManager;
+/*import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,9 +11,10 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 
-public class LoginPage {
+public class Task1 {
     WebDriver driver;
     WebDriverWait wait;
+
 
     @BeforeClass
     public void seUp() {
@@ -184,7 +183,7 @@ public class LoginPage {
     }
 }
 
-
+*/
 
 
 
