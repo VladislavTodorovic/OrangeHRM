@@ -48,7 +48,8 @@ public class PIMTest extends BaseOtherTest {
 
     @Test(priority = 30)
     public void searchByEmloyeeName(){
-        pimPage.searchFormularForEmployeeNameOrSupervisorName("Employee Name", " Jovan Jovic");
+        pimPage.searchFormularForEmployeeNameOrSupervisorName("Employee Name", "Jovan Jovic");
+        pimPage.getSearchButtonBelowEmployeeInformationFields().click();
 
     }
 

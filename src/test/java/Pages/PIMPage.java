@@ -109,29 +109,22 @@ public class PIMPage {
             }
         }
 
+
     public void searchFormularForEmployeeNameOrSupervisorName(String nameOfField, String valueInField) {
         List<WebElement> listOfParentElements = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-input-group.oxd-input-field-bottom-space")));
-
         for (WebElement parent : listOfParentElements) {
-            // Nalazimo child elemente
             List<WebElement> childElements = parent.findElements(By.className("oxd-input-group__label-wrapper"));
-
             for (WebElement child : childElements) {
-                // Ako je tekst u child elementu jednak nameOfField, unosimo vrednost u grandson
                 if (child.getText().equals(nameOfField)) {
-
-                    // Nalazimo grandson elemente u okviru trenutnog parent elementa
-                    List<WebElement> grandsonElements = parent.findElements(By.cssSelector(".oxd-autocomplete-text-input.oxd-autocomplete-text-input--active"));
-
+                    List<WebElement> grandsonElements = parent.findElements(By.cssSelector("input[placeholder='Type for hints...']"));
                     if (!grandsonElements.isEmpty()) {
                         WebElement grandson = grandsonElements.get(0);
-
-                        // Proveravamo da li je grandson prikazan i omogućeno je da se u njega unese tekst
+                        //wdwait.until(ExpectedConditions.elementToBeClickable(grandson));
                         if (grandson.isDisplayed() && grandson.isEnabled()) {
+                            grandson.click();
                             grandson.sendKeys(valueInField);
-                            grandson.click();  // Ako je potrebno, kliknite na element nakon unosa
-
-                            break;  // Prekidamo petlju nakon što smo uneli vrednost u grandson
+                            grandson.click();
+                            break;
                         }
                     }
                 }
@@ -140,7 +133,8 @@ public class PIMPage {
     }
 
 
-    }
+
+}
 
 
 
