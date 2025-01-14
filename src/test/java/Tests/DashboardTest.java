@@ -152,6 +152,7 @@ public class DashboardTest extends BaseOtherTest {
     public void searchField(){
         dashboardPage.getSearchButton().sendKeys("Vacancies");
         Assert.assertTrue(dashboardPage.getLayoutSpace().getText().contains("Vacancies"));
+        //OVAJ TEST IMA BUG!
     }
 
     @Test(priority = 280)

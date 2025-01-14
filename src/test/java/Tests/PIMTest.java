@@ -5,11 +5,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Set;
 
 public class PIMTest extends BaseOtherTest {
@@ -32,7 +34,7 @@ public class PIMTest extends BaseOtherTest {
 
 
     @Test(priority = 20)
-    public void addNewEmployeeFirstTune() {
+    public void addNewEmployeeFirstTime() {
     pimPage.getAddButton().click();
     pimPage.getFieldFirstName().sendKeys("Jovan");
     for(int i=0; i<4; i++) {
@@ -53,9 +55,25 @@ public class PIMTest extends BaseOtherTest {
 
     }
 
-    @Test(priority = 33)
+    @Test(priority = 40)
     public void searchByEmployeeId (){
         pimPage.searchFormularForId("Employee Id", employeeIdByVlajke);
+        pimPage.getSearchButtonBelowEmployeeInformationFields().click();
+    }
+
+    @Test(priority = 45)
+    public void izaberiOpcijuUDroplisti() {
+
+
+    }
+    @Test(priority = 50)
+    public void searchByEmploymentStatys(){
+        pimPage.searchFormularForEmployeeNameSelectInField("Employment Status", "Freelance");
+    }
+
+    @Test(priority = 70)
+    public void searchBySupervisorName(){
+        pimPage.searchFormularForEmployeeNameOrSupervisorName("Supervisor Name", "Peter Mac Anderson");
         pimPage.getSearchButtonBelowEmployeeInformationFields().click();
     }
 

@@ -48,12 +48,14 @@ public class LoginTest extends BaseTest {
     public void userCannotLogInWithUsernameLowercaseAndValidPassword(){
         loginPage.login("admin", "admin123");
         Assert.assertTrue(loginPage.getLoginButton().isDisplayed());
+        //OVAJ TEST IMA BUG!
     }
 
     @Test (priority=70)
     public void userCannotLogInWithUsernameUppercaseAndValidPassword(){
         loginPage.login("ADMIN", "admin123");
         Assert.assertTrue(loginPage.getLoginButton().isDisplayed());
+        //OVAJ TEST IMA BUG!
     }
 
     @Test (priority=80)

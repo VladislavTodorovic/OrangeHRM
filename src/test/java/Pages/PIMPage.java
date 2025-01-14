@@ -5,11 +5,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PIMPage {
+
 
     WebDriver driver;
     WebDriverWait wdwait;
@@ -34,45 +37,56 @@ public class PIMPage {
         this.wdwait = wdwait;
     }
 
+
     public WebElement getTextEmployeeInformation() {
         return driver.findElement(By.cssSelector(".oxd-text.oxd-text--h5.oxd-table-filter-title"));
     }
+
 
     public WebElement getAddButton() {
         return driver.findElement(By.cssSelector(".oxd-icon.bi-plus.oxd-button-icon"));
     }
 
+
     public WebElement getTextAddEmployee() {
         return driver.findElement(By.cssSelector(".oxd-text.oxd-text--h6.orangehrm-main-title"));
     }
+
 
     public WebElement getFieldFirstName() {
         return driver.findElement(By.cssSelector(".oxd-input.oxd-input--active.orangehrm-firstname"));
     }
 
+
     public WebElement getFieldLastName() {
         return driver.findElement(By.cssSelector(".oxd-input.oxd-input--active.orangehrm-lastname"));
     }
+
 
     public WebElement getFieldEmployeeId() {
         return driver.findElement(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/div/div/div[2]/input"));
     }
 
+
     public WebElement getSaveAddEmployeeGreenButton() {
         return driver.findElement(By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--secondary.orangehrm-left-space"));
     }
+
 
     public WebElement getEmployeeIdInPeronalDetails() {
         return driver.findElement(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div[1]/div[1]/div/div[2]/input"));
     }
 
+
     public WebElement getEmployeeNameAbovePicture() {
         return driver.findElement(By.className("orangehrm-edit-employee-name"));
     }
 
+
     public WebElement getSearchButtonBelowEmployeeInformationFields() {
         return driver.findElement(By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--secondary.orangehrm-left-space"));
     }
+
 
     //--------
     public void redirectionToTopBarNav(String requestedNav) {
@@ -89,7 +103,8 @@ public class PIMPage {
         }
     }
 
-//OVO JE DOBRO, NE DIRAJ GA DA NE BI SVE POKVARIO!
+
+    //OVO JE DOBRO, NE DIRAJ GA DA NE BI SVE POKVARIO!
     public void searchFormularForId(String nameOfField, String valueInField) {
         List<WebElement> listOfParentElements = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-input-group.oxd-input-field-bottom-space")));
         for (WebElement parent : listOfParentElements) {
@@ -103,13 +118,13 @@ public class PIMPage {
                             grandson.sendKeys(valueInField);
                             break;
                         }
-                    }
-                    }
+                    }//OVO JE DOBRO, NE DIRAJ GA DA NE BI SVE POKVARIO!
                 }
             }
         }
+    }
 
-
+    //OVO JE DOBRO, NE DIRAJ GA DA NE BI SVE POKVARIO!
     public void searchFormularForEmployeeNameOrSupervisorName(String nameOfField, String valueInField) {
         List<WebElement> listOfParentElements = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-input-group.oxd-input-field-bottom-space")));
         for (WebElement parent : listOfParentElements) {
@@ -126,15 +141,40 @@ public class PIMPage {
                             grandson.click();
                             break;
                         }
+                    }//OVO JE DOBRO, NE DIRAJ GA DA NE BI SVE POKVARIO!
+                }
+            }
+        }
+    }
+
+    public void searchFormularForEmployeeNameSelectInField(String nameOfField, String inputInField) {
+        List<WebElement> listOfParentElements = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-input-group.oxd-input-field-bottom-space")));
+        for (WebElement parent : listOfParentElements) {
+            List<WebElement> childElements = parent.findElements(By.className("oxd-input-group__label-wrapper"));
+            for (WebElement child : childElements) {
+                if (child.getText().equals(nameOfField)) {
+                    List<WebElement> grandsonElements = parent.findElements(By.cssSelector(".oxd-select-text.oxd-select-text--active"));
+                    if (!grandsonElements.isEmpty()) {
+                        WebElement grandson = grandsonElements.get(0);
+                        //wdwait.until(ExpectedConditions.elementToBeClickable(grandson));
+                        if (grandson.isDisplayed() && grandson.isEnabled()) {
+                            WebElement dropdown = grandson.findElement(By.className("oxd-select-text-input"));
+                            dropdown.click();
+                            List<WebElement> options = driver.findElements(By.cssSelector(".oxd-select-dropdown .oxd-select-option"));
+                            for (WebElement option : options) {
+                                if (option.getText().contains(inputInField)) {
+                                    option.click();
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
 
-
-
-}
+        }
 
 
 
