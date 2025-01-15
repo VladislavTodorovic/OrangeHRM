@@ -147,6 +147,9 @@ public class PIMPage {
         }
     }
 
+
+
+// LEPO TI SE OTVORIO PADAJUCI MENI, SAD DALJE CERAJ!
     public void searchFormularForEmployeeNameSelectInField(String nameOfField, String inputInField) {
         List<WebElement> listOfParentElements = wdwait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".oxd-input-group.oxd-input-field-bottom-space")));
         for (WebElement parent : listOfParentElements) {
@@ -156,25 +159,17 @@ public class PIMPage {
                     List<WebElement> grandsonElements = parent.findElements(By.cssSelector(".oxd-select-text.oxd-select-text--active"));
                     if (!grandsonElements.isEmpty()) {
                         WebElement grandson = grandsonElements.get(0);
-                        //wdwait.until(ExpectedConditions.elementToBeClickable(grandson));
-                        if (grandson.isDisplayed() && grandson.isEnabled()) {
-                            WebElement dropdown = grandson.findElement(By.className("oxd-select-text-input"));
-                            dropdown.click();
-                            List<WebElement> options = driver.findElements(By.cssSelector(".oxd-select-dropdown .oxd-select-option"));
-                            for (WebElement option : options) {
-                                if (option.getText().contains(inputInField)) {
-                                    option.click();
-                                    break;
-                                }
-                            }
-                        }
+
+                        grandson.click();
+
+
                     }
                 }
             }
         }
     }
 
-        }
+}
 
 
 

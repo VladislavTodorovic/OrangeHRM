@@ -61,14 +61,12 @@ public class PIMTest extends BaseOtherTest {
         pimPage.getSearchButtonBelowEmployeeInformationFields().click();
     }
 
-    @Test(priority = 45)
-    public void izaberiOpcijuUDroplisti() {
-
-
-    }
+//OVAJ TEST RESAVAS! OVAJ TEST RESAVAS! OVAJ TEST RESAVAS! OVAJ TEST RESAVAS! OVAJ TEST RESAVAS! OVAJ TEST RESAVAS!
     @Test(priority = 50)
     public void searchByEmploymentStatys(){
         pimPage.searchFormularForEmployeeNameSelectInField("Employment Status", "Freelance");
+
+
     }
 
     @Test(priority = 70)
